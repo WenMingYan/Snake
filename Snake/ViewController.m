@@ -31,6 +31,9 @@ CGFloat kPlandLength = 20;
 
 @property (nonatomic, strong) SCNCamera *camera; /**< 照相机  */
 
+@property (nonatomic, assign) BOOL isPlaying;/** < 是否正在游戏*/
+@property (nonatomic, strong) NSTimer *timer; /**< 每秒做的动作  */
+
 @end
 
 @implementation ViewController
@@ -61,7 +64,7 @@ CGFloat kPlandLength = 20;
  */
 - (void)setupSnake {
     MYSnakeItemBox *preItemBox;
-    SCNVector3 vector = SCNVector3Make(0.1, 0.1, 5);
+    SCNVector3 vector = SCNVector3Make(1, 1, 1);
     for (int i = 0; i < kSnakeInitialCount; i++) {
         MYSnakeItem *item = [[MYSnakeItem alloc] init];
         item.position = vector;
@@ -71,18 +74,180 @@ CGFloat kPlandLength = 20;
         preItemBox = itemBox;
         
         // 改变vector
-        
+        if (arc4random() % 2) {
+            vector.x += 0.5;
+        } else {
+            vector.y += 0.5;
+        }
         [self.snakeItems addObject:itemBox];
     }
     // 添加蛇到场景中
     for (MYSnakeItemBox *snakeItemBox in self.snakeItems) {
-        [self.threeScene.rootNode addChildNode:[SCNNode nodeWithGeometry:snakeItemBox]];
+        SCNNode *node = [SCNNode nodeWithGeometry:snakeItemBox];
+        node.position = snakeItemBox.position;
+        snakeItemBox.node = node;
+        [self.threeScene.rootNode addChildNode:node];
     }
+    MYSnakeItemBox *firstSnakeItemBox = [self.snakeItems objectAtIndex:0];
+    SCNMaterial *material = [SCNMaterial material];
+    material.diffuse.contents = [UIColor greenColor];
+    firstSnakeItemBox.materials = @[material];
 }
 
 #pragma mark - --------------------UITableViewDelegate--------------
 #pragma mark - --------------------CustomDelegate--------------
 #pragma mark - --------------------Event Response--------------
+
+- (void)onClickTap:(UIGestureRecognizer *)recognizer {
+    if (!self.isPlaying) {
+        self.isPlaying = YES;
+    }
+    if ([recognizer.view isEqual:self.threeDscnView]) {
+         CGPoint point = [recognizer locationInView:self.threeDscnView];
+        NSArray<SCNHitTestResult *> *results = [self.threeDscnView hitTest:point options:nil];
+        SCNHitTestResult *result = results.firstObject;
+        if (result) {
+            SCNPlane *plane = (SCNPlane*)result.node.geometry;
+            if ([plane isKindOfClass:[SCNPlane class]]) {
+                if ([plane isEqual:self.bottomPlane]) {
+                    [self singleStepBottom];
+                }
+                if ([plane isEqual:self.topPlane]) {
+                    [self singleStepTop];
+                }
+                if ([plane isEqual:self.leftPlane]) {
+                    [self singleStepLeft];
+                }
+                if ([plane isEqual:self.rightPlane]) {
+                    [self singleStepRight];
+                }
+                if ([plane isEqual:self.forePlane]) {
+                    [self singleStepFore];
+                }
+                if ([plane isEqual:self.backPlane]) {
+                    [self singleStepBack];
+                }
+            }
+        }
+    }
+}
+
+/**
+ 后移一格
+ */
+- (void)singleStepBack {
+    [self actionfollowSnakeItem];
+    [self moveSnakeHead:SCNVector3Make(0 , 0, - 0.5)];
+}
+
+- (void)moveSnakeHead:(SCNVector3)diffVector {
+    MYSnakeItemBox *box = self.snakeItems.firstObject;
+    SCNVector3 vector = box.position;
+    SCNVector3 newVector = SCNVector3Make(vector.x + diffVector.x , vector.y + diffVector.y, vector.z + diffVector.z);
+    SCNNode *node = box.node;
+    SCNAction *action = [SCNAction moveTo:newVector duration:0.5];
+    //    NSLog(@"vector = {%f,%f,%f}",vector.x,vector.y,vector.z);
+    //    NSLog(@"newVector = {%f,%f,%f}",newVector.x,newVector.y,newVector.z);
+    [node runAction:action];
+    box.position = newVector;
+    BOOL isAlive = [self checkIsALive];
+    if (!isAlive) {
+        self.isPlaying = NO;
+        [self restart];
+    }
+}
+
+- (void)restart {
+    //TODO: wmy 重新开始
+}
+
+/**
+ 确认蛇是否存活
+ */
+- (BOOL)checkIsALive {
+    //1. 蛇头是否在蛇身体内
+    BOOL isInSnakeBody = [self checkHeadIsInSnakeBody];
+    //2. 蛇头是否到了边界
+    BOOL isExceedEdge = [self checkHeadIsExceedEdge];
+    return !isInSnakeBody && !isExceedEdge;
+}
+
+/**
+ 是否越过边界
+ */
+- (BOOL)checkHeadIsExceedEdge {
+    MYSnakeItemBox *firstBox = self.snakeItems.firstObject;
+    if (fabsf(firstBox.position.x) < 5.f &&
+        (firstBox.position.y < 10.f && firstBox.position.y >0) &&
+        fabsf(firstBox.position.z) < 5.f) {
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)checkHeadIsInSnakeBody {
+    MYSnakeItemBox *firstBox = self.snakeItems.firstObject;
+    for (int i = 1; i < self.snakeItems.count; i++) {
+        MYSnakeItemBox *box = [self.snakeItems objectAtIndex:i];
+        if (SCNVector3EqualToVector3(firstBox.position, box.position)) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+/**
+ 前移一格
+ */
+- (void)singleStepFore {
+    [self actionfollowSnakeItem];
+    [self moveSnakeHead:SCNVector3Make( 0, 0, 0.5)];
+}
+
+- (void)actionfollowSnakeItem {
+    for (int i = (int)self.snakeItems.count - 1; i >0 ; i--) {
+        MYSnakeItemBox *followBox = [self.snakeItems objectAtIndex:i];
+        SCNNode *node = followBox.node;
+        SCNAction *action = [SCNAction moveTo:followBox.preItemBox.position duration:0.5];
+        //        NSLog(@"vector = {%f,%f,%f}",followBox.preItemBox.position.x,followBox.preItemBox.position.y,followBox.preItemBox.position.z);
+        [node runAction:action];
+        followBox.position = followBox.preItemBox.position;
+    }
+}
+
+/**
+ 右移一格
+ */
+- (void)singleStepRight {
+    [self actionfollowSnakeItem];
+    [self moveSnakeHead:SCNVector3Make(0.5, 0, 0)];
+}
+
+/**
+ 左移一格
+ */
+- (void)singleStepLeft {
+    [self actionfollowSnakeItem];
+    [self moveSnakeHead:SCNVector3Make(-0.5, 0, 0)];
+}
+
+
+/**
+ 下降一格
+ */
+- (void)singleStepBottom {
+    [self actionfollowSnakeItem];
+    [self moveSnakeHead:SCNVector3Make(0, -0.5, 0)];
+}
+
+/**
+ 上升一格
+ */
+- (void)singleStepTop {
+    [self actionfollowSnakeItem];
+    [self moveSnakeHead:SCNVector3Make(0, 0.5, 0)];
+}
+
 #pragma mark - --------------------private methods--------------
 #pragma mark - --------------------getters & setters & init members ------------------
 
@@ -103,6 +268,8 @@ CGFloat kPlandLength = 20;
 - (SCNScene *)threeScene {
     if (!_threeScene) {
         _threeScene = [SCNScene sceneNamed:@"snake.scnassets/snake.scn"];
+        
+        
         // 添加照相机
         SCNNode *bottomNode = [_threeScene.rootNode childNodeWithName:@"bottomPlane" recursively:NO];
         SCNNode *topNode = [_threeScene.rootNode childNodeWithName:@"topPlane" recursively:NO];
@@ -110,7 +277,6 @@ CGFloat kPlandLength = 20;
         SCNNode *leftNode = [_threeScene.rootNode childNodeWithName:@"leftPlane" recursively:NO];
         SCNNode *foreNode = [_threeScene.rootNode childNodeWithName:@"forePlane" recursively:NO];
         SCNNode *rightNode = [_threeScene.rootNode childNodeWithName:@"rightPlane" recursively:NO];
-        
         SCNNode *cameraNode = [_threeScene.rootNode childNodeWithName:@"camera" recursively:NO];
         
         self.bottomPlane = (SCNPlane *)bottomNode.geometry;
@@ -137,6 +303,7 @@ CGFloat kPlandLength = 20;
         self.rightPlane.materials = @[material];
         
         self.camera.focalLength = 70;
+ 
     }
     return _threeScene;
 }
@@ -144,6 +311,9 @@ CGFloat kPlandLength = 20;
 - (SCNView *)threeDscnView {
     if (!_threeDscnView) {
         _threeDscnView = [[SCNView alloc] init];
+        UITapGestureRecognizer *sceneTap = [[UITapGestureRecognizer alloc]initWithTarget:self
+                                                                                  action:@selector(onClickTap:)];
+        [_threeDscnView addGestureRecognizer:sceneTap];
         _threeDscnView.scene = self.threeScene;
         _threeDscnView.backgroundColor = [UIColor grayColor];
         _threeDscnView.allowsCameraControl = YES;

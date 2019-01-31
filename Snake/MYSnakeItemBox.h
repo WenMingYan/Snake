@@ -15,8 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MYSnakeItemBox : SCNBox
 
 + (instancetype)snakeItemBoxiWithSnakeItem:(MYSnakeItem *)item;
+
 @property(nonatomic, weak) MYSnakeItemBox *nextItemBox;/**< 下一节  */
 @property(nonatomic, weak) MYSnakeItemBox *preItemBox;/**< 上一节  */
+
+@property (nonatomic, assign) SCNVector3 position;
+@property(nonatomic, weak) SCNNode *node;/**< 根节点  */
 
 @end
 

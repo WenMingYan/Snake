@@ -19,10 +19,23 @@
 + (instancetype)snakeItemBoxiWithSnakeItem:(MYSnakeItem *)item {
     MYSnakeItemBox *itemBox = [[MYSnakeItemBox alloc] init];
     itemBox.item = item;
-    itemBox.width = 0.1;
-    itemBox.height = 0.1;
-    itemBox.length = 0.1;
+    itemBox.width = 0.5;
+    itemBox.height = 0.5;
+    itemBox.length = 0.5;
+    itemBox.chamferRadius = 0.1;
+    // 材质
+    SCNMaterial *material = [SCNMaterial material];
+    material.diffuse.contents = [UIColor redColor];
+    itemBox.materials = @[material];
     return itemBox;
+}
+
+- (void)setPosition:(SCNVector3)position {
+    self.item.position = position;
+}
+
+- (SCNVector3)position {
+    return self.item.position;
 }
 
 - (void)setItem:(MYSnakeItem *)item {
