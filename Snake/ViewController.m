@@ -99,11 +99,14 @@ typedef enum : NSUInteger {
     SCNVector3 vector = SCNVector3Zero;
     BOOL isLegalFoodPosition = YES;
     do {
-        int i = 9;
-        CGFloat vectorX = 0.25 + 0.5 * i;
-        CGFloat vectorY = 0.25 + 0.5 * i;
-        CGFloat vectorZ = 0.25 + 0.5 * i;
-        SCNVector3 vector = SCNVector3Make(vectorX, vectorY, vectorZ);
+        int x = arc4random() % 19;
+        CGFloat vectorX = 0.25 + 0.5 * (x - 10);
+        int y = arc4random() % 19;
+        CGFloat vectorY = 0.25 + 0.5 * y;
+        int z = (arc4random() % 19);
+        CGFloat vectorZ = 0.25 + 0.5 * (z - 10);
+        
+        vector = SCNVector3Make(vectorX, vectorY, vectorZ);
         for (MYSnakeItemBox *itemBox in self.snakeItems) {
             if (SCNVector3EqualToVector3(vector, itemBox.position)) {
                 isLegalFoodPosition = NO;
@@ -123,6 +126,7 @@ typedef enum : NSUInteger {
  */
 - (void)setupSnake {
     MYSnakeItemBox *preItemBox;
+    //TODO: wmy 初始化蛇头
     SCNVector3 vector = SCNVector3Make(1.25, 1.25, 1.25);
     for (int i = 0; i < kSnakeInitialCount; i++) {
 
@@ -162,9 +166,9 @@ typedef enum : NSUInteger {
 #pragma mark - --------------------Event Response--------------
 
 - (void)onClickTap:(UIGestureRecognizer *)recognizer {
-//    if (!self.isPlaying) {
-//        self.isPlaying = YES;
-//    }
+    if (!self.isPlaying) {
+        self.isPlaying = YES;
+    }
     if ([recognizer.view isEqual:self.threeDscnView]) {
          CGPoint point = [recognizer locationInView:self.threeDscnView];
         NSArray<SCNHitTestResult *> *results = [self.threeDscnView hitTest:point options:nil];
@@ -372,20 +376,20 @@ typedef enum : NSUInteger {
 
 - (void)setIsPlaying:(BOOL)isPlaying {
     _isPlaying = isPlaying;
-//    if (isPlaying && !_timer) {
-//        dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.timeStep
-//                                                              target:self
-//                                                            selector:@selector(onTimer)
-//                                                            userInfo:nil
-//                                                             repeats:YES];
-//            [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-//            self.timer = timer;
-//        });
-//    } else {
-//        [self.timer invalidate];
-//        _timer = nil;
-//    }
+    if (isPlaying && !_timer) {
+        dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.timeStep
+                                                              target:self
+                                                            selector:@selector(onTimer)
+                                                            userInfo:nil
+                                                             repeats:YES];
+            [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+            self.timer = timer;
+        });
+    } else {
+        [self.timer invalidate];
+        _timer = nil;
+    }
 }
 
 - (void)onTimer {

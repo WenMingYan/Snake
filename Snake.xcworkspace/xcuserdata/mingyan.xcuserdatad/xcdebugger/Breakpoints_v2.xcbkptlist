@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Snake/ViewController.m"
-            timestampString = "570612305.4929889"
+            timestampString = "570618007.888697"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "-pushRestartPage"
             landmarkType = "7">
             <Locations>
@@ -36,11 +36,11 @@
                   moduleName = "Snake"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mingyan/Developer/iOS/Snake/Snake/ViewController.m"
-                  timestampString = "570612305.658455"
+                  timestampString = "570617703.3038"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "231"
-                  endingLineNumber = "231"
+                  startingLineNumber = "247"
+                  endingLineNumber = "247"
                   offsetFromSymbolStart = "176">
                </Location>
                <Location
@@ -51,11 +51,11 @@
                   moduleName = "Snake"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mingyan/Developer/iOS/Snake/Snake/ViewController.m"
-                  timestampString = "570612305.660852"
+                  timestampString = "570617703.306767"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "231"
-                  endingLineNumber = "231"
+                  startingLineNumber = "247"
+                  endingLineNumber = "247"
                   offsetFromSymbolStart = "12">
                </Location>
                <Location
@@ -66,11 +66,11 @@
                   moduleName = "Snake"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mingyan/Developer/iOS/Snake/Snake/ViewController.m"
-                  timestampString = "570612305.663366"
+                  timestampString = "570617703.3089319"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "231"
-                  endingLineNumber = "231"
+                  startingLineNumber = "247"
+                  endingLineNumber = "247"
                   offsetFromSymbolStart = "16">
                </Location>
             </Locations>
@@ -83,11 +83,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Snake/ViewController.m"
-            timestampString = "570612305.493415"
+            timestampString = "570618007.889358"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "407"
-            endingLineNumber = "407"
+            startingLineNumber = "426"
+            endingLineNumber = "426"
             landmarkName = "-onTimer"
             landmarkType = "7">
          </BreakpointContent>
@@ -99,12 +99,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Snake/ViewController.m"
-            timestampString = "570612316.9866771"
+            timestampString = "570618007.8898081"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
-            landmarkName = "-onClickTap:"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "-getFoodPosition"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Snake/ViewController.m"
+            timestampString = "570618007.890214"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "-getFoodPosition"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
