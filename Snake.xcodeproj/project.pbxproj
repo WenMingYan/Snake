@@ -3,74 +3,94 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F8AB4C8621FD659A00705615 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AB4C8521FD659A00705615 /* AppDelegate.m */; };
-		F8AB4C8821FD659A00705615 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F8AB4C8721FD659A00705615 /* art.scnassets */; };
-		F8AB4C8B21FD659A00705615 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AB4C8A21FD659A00705615 /* GameViewController.m */; };
-		F8AB4C8E21FD659A00705615 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8AB4C8C21FD659A00705615 /* Main.storyboard */; };
-		F8AB4C9021FD659A00705615 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8AB4C8F21FD659A00705615 /* Assets.xcassets */; };
-		F8AB4C9321FD659A00705615 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8AB4C9121FD659A00705615 /* LaunchScreen.storyboard */; };
-		F8AB4C9621FD659A00705615 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AB4C9521FD659A00705615 /* main.m */; };
-		F8AB4CA021FD659B00705615 /* SnakeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AB4C9F21FD659B00705615 /* SnakeTests.m */; };
-		F8AB4CAB21FD659B00705615 /* SnakeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F8AB4CAA21FD659B00705615 /* SnakeUITests.m */; };
+		166279AAC0787A821AA0D13B /* libPods-Snake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85DB67814327D0D9786C1474 /* libPods-Snake.a */; };
+		F85E74512201486F00FA641D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F85E74502201486F00FA641D /* AppDelegate.m */; };
+		F85E74542201486F00FA641D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F85E74532201486F00FA641D /* ViewController.m */; };
+		F85E74572201486F00FA641D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F85E74552201486F00FA641D /* Main.storyboard */; };
+		F85E74592201487000FA641D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F85E74582201487000FA641D /* Assets.xcassets */; };
+		F85E745C2201487000FA641D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F85E745A2201487000FA641D /* LaunchScreen.storyboard */; };
+		F85E745F2201487000FA641D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F85E745E2201487000FA641D /* main.m */; };
+		F85E74692201487000FA641D /* SnakeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F85E74682201487000FA641D /* SnakeTests.m */; };
+		F85E74742201487000FA641D /* SnakeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F85E74732201487000FA641D /* SnakeUITests.m */; };
+		F862E26B22017FC100D7D510 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F862E26A22017FC100D7D510 /* SceneKit.framework */; };
+		F862E26E2201813000D7D510 /* MYSnakeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F862E26D2201813000D7D510 /* MYSnakeItem.m */; };
+		F862E271220181F500D7D510 /* MYSnakeItemBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F862E270220181F500D7D510 /* MYSnakeItemBox.m */; };
+		F862E2732201839B00D7D510 /* snake.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F862E2722201839B00D7D510 /* snake.scnassets */; };
+		F862E2762201873800D7D510 /* MYGridBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F862E2752201873800D7D510 /* MYGridBox.m */; };
+		F862E279220188C400D7D510 /* MYGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = F862E278220188C400D7D510 /* MYGridView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F8AB4C9C21FD659B00705615 /* PBXContainerItemProxy */ = {
+		F85E74652201487000FA641D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F8AB4C7921FD659A00705615 /* Project object */;
+			containerPortal = F85E74442201486F00FA641D /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F8AB4C8021FD659A00705615;
+			remoteGlobalIDString = F85E744B2201486F00FA641D;
 			remoteInfo = Snake;
 		};
-		F8AB4CA721FD659B00705615 /* PBXContainerItemProxy */ = {
+		F85E74702201487000FA641D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F8AB4C7921FD659A00705615 /* Project object */;
+			containerPortal = F85E74442201486F00FA641D /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F8AB4C8021FD659A00705615;
+			remoteGlobalIDString = F85E744B2201486F00FA641D;
 			remoteInfo = Snake;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F8AB4C8121FD659A00705615 /* Snake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snake.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8AB4C8421FD659A00705615 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		F8AB4C8521FD659A00705615 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F8AB4C8721FD659A00705615 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		F8AB4C8921FD659A00705615 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
-		F8AB4C8A21FD659A00705615 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
-		F8AB4C8D21FD659A00705615 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F8AB4C8F21FD659A00705615 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F8AB4C9221FD659A00705615 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F8AB4C9421FD659A00705615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F8AB4C9521FD659A00705615 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F8AB4C9B21FD659B00705615 /* SnakeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnakeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8AB4C9F21FD659B00705615 /* SnakeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnakeTests.m; sourceTree = "<group>"; };
-		F8AB4CA121FD659B00705615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F8AB4CA621FD659B00705615 /* SnakeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnakeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8AB4CAA21FD659B00705615 /* SnakeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnakeUITests.m; sourceTree = "<group>"; };
-		F8AB4CAC21FD659B00705615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7169FDCC1830BCD053D3745B /* Pods-Snake.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snake.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snake/Pods-Snake.release.xcconfig"; sourceTree = "<group>"; };
+		85DB67814327D0D9786C1474 /* libPods-Snake.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Snake.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACD66F27328BC945FD869CA8 /* Pods-Snake.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snake.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snake/Pods-Snake.debug.xcconfig"; sourceTree = "<group>"; };
+		F85E744C2201486F00FA641D /* Snake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snake.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F85E744F2201486F00FA641D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F85E74502201486F00FA641D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F85E74522201486F00FA641D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F85E74532201486F00FA641D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F85E74562201486F00FA641D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F85E74582201487000FA641D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F85E745B2201487000FA641D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F85E745D2201487000FA641D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F85E745E2201487000FA641D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F85E74642201487000FA641D /* SnakeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnakeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F85E74682201487000FA641D /* SnakeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnakeTests.m; sourceTree = "<group>"; };
+		F85E746A2201487000FA641D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F85E746F2201487000FA641D /* SnakeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnakeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F85E74732201487000FA641D /* SnakeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnakeUITests.m; sourceTree = "<group>"; };
+		F85E74752201487000FA641D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F862E26A22017FC100D7D510 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		F862E26C2201813000D7D510 /* MYSnakeItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYSnakeItem.h; sourceTree = "<group>"; };
+		F862E26D2201813000D7D510 /* MYSnakeItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYSnakeItem.m; sourceTree = "<group>"; };
+		F862E26F220181F500D7D510 /* MYSnakeItemBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYSnakeItemBox.h; sourceTree = "<group>"; };
+		F862E270220181F500D7D510 /* MYSnakeItemBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYSnakeItemBox.m; sourceTree = "<group>"; };
+		F862E2722201839B00D7D510 /* snake.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = snake.scnassets; sourceTree = "<group>"; };
+		F862E2742201873800D7D510 /* MYGridBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYGridBox.h; sourceTree = "<group>"; };
+		F862E2752201873800D7D510 /* MYGridBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYGridBox.m; sourceTree = "<group>"; };
+		F862E277220188C400D7D510 /* MYGridView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYGridView.h; sourceTree = "<group>"; };
+		F862E278220188C400D7D510 /* MYGridView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYGridView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F8AB4C7E21FD659A00705615 /* Frameworks */ = {
+		F85E74492201486F00FA641D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F862E26B22017FC100D7D510 /* SceneKit.framework in Frameworks */,
+				166279AAC0787A821AA0D13B /* libPods-Snake.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F85E74612201487000FA641D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8AB4C9821FD659B00705615 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F8AB4CA321FD659B00705615 /* Frameworks */ = {
+		F85E746C2201487000FA641D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -80,57 +100,85 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F8AB4C7821FD659A00705615 = {
+		0FAADE7E14B1DB2496651494 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F8AB4C8321FD659A00705615 /* Snake */,
-				F8AB4C9E21FD659B00705615 /* SnakeTests */,
-				F8AB4CA921FD659B00705615 /* SnakeUITests */,
-				F8AB4C8221FD659A00705615 /* Products */,
+				ACD66F27328BC945FD869CA8 /* Pods-Snake.debug.xcconfig */,
+				7169FDCC1830BCD053D3745B /* Pods-Snake.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C5B3749017636542F94CEC71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F862E26A22017FC100D7D510 /* SceneKit.framework */,
+				85DB67814327D0D9786C1474 /* libPods-Snake.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F85E74432201486F00FA641D = {
+			isa = PBXGroup;
+			children = (
+				F85E744E2201486F00FA641D /* Snake */,
+				F85E74672201487000FA641D /* SnakeTests */,
+				F85E74722201487000FA641D /* SnakeUITests */,
+				F85E744D2201486F00FA641D /* Products */,
+				0FAADE7E14B1DB2496651494 /* Pods */,
+				C5B3749017636542F94CEC71 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		F8AB4C8221FD659A00705615 /* Products */ = {
+		F85E744D2201486F00FA641D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F8AB4C8121FD659A00705615 /* Snake.app */,
-				F8AB4C9B21FD659B00705615 /* SnakeTests.xctest */,
-				F8AB4CA621FD659B00705615 /* SnakeUITests.xctest */,
+				F85E744C2201486F00FA641D /* Snake.app */,
+				F85E74642201487000FA641D /* SnakeTests.xctest */,
+				F85E746F2201487000FA641D /* SnakeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F8AB4C8321FD659A00705615 /* Snake */ = {
+		F85E744E2201486F00FA641D /* Snake */ = {
 			isa = PBXGroup;
 			children = (
-				F8AB4C8421FD659A00705615 /* AppDelegate.h */,
-				F8AB4C8521FD659A00705615 /* AppDelegate.m */,
-				F8AB4C8721FD659A00705615 /* art.scnassets */,
-				F8AB4C8921FD659A00705615 /* GameViewController.h */,
-				F8AB4C8A21FD659A00705615 /* GameViewController.m */,
-				F8AB4C8C21FD659A00705615 /* Main.storyboard */,
-				F8AB4C8F21FD659A00705615 /* Assets.xcassets */,
-				F8AB4C9121FD659A00705615 /* LaunchScreen.storyboard */,
-				F8AB4C9421FD659A00705615 /* Info.plist */,
-				F8AB4C9521FD659A00705615 /* main.m */,
+				F85E744F2201486F00FA641D /* AppDelegate.h */,
+				F85E74502201486F00FA641D /* AppDelegate.m */,
+				F85E74522201486F00FA641D /* ViewController.h */,
+				F85E74532201486F00FA641D /* ViewController.m */,
+				F85E74552201486F00FA641D /* Main.storyboard */,
+				F85E74582201487000FA641D /* Assets.xcassets */,
+				F85E745A2201487000FA641D /* LaunchScreen.storyboard */,
+				F85E745D2201487000FA641D /* Info.plist */,
+				F85E745E2201487000FA641D /* main.m */,
+				F862E26C2201813000D7D510 /* MYSnakeItem.h */,
+				F862E26D2201813000D7D510 /* MYSnakeItem.m */,
+				F862E26F220181F500D7D510 /* MYSnakeItemBox.h */,
+				F862E270220181F500D7D510 /* MYSnakeItemBox.m */,
+				F862E2722201839B00D7D510 /* snake.scnassets */,
+				F862E2742201873800D7D510 /* MYGridBox.h */,
+				F862E2752201873800D7D510 /* MYGridBox.m */,
+				F862E277220188C400D7D510 /* MYGridView.h */,
+				F862E278220188C400D7D510 /* MYGridView.m */,
 			);
 			path = Snake;
 			sourceTree = "<group>";
 		};
-		F8AB4C9E21FD659B00705615 /* SnakeTests */ = {
+		F85E74672201487000FA641D /* SnakeTests */ = {
 			isa = PBXGroup;
 			children = (
-				F8AB4C9F21FD659B00705615 /* SnakeTests.m */,
-				F8AB4CA121FD659B00705615 /* Info.plist */,
+				F85E74682201487000FA641D /* SnakeTests.m */,
+				F85E746A2201487000FA641D /* Info.plist */,
 			);
 			path = SnakeTests;
 			sourceTree = "<group>";
 		};
-		F8AB4CA921FD659B00705615 /* SnakeUITests */ = {
+		F85E74722201487000FA641D /* SnakeUITests */ = {
 			isa = PBXGroup;
 			children = (
-				F8AB4CAA21FD659B00705615 /* SnakeUITests.m */,
-				F8AB4CAC21FD659B00705615 /* Info.plist */,
+				F85E74732201487000FA641D /* SnakeUITests.m */,
+				F85E74752201487000FA641D /* Info.plist */,
 			);
 			path = SnakeUITests;
 			sourceTree = "<group>";
@@ -138,13 +186,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F8AB4C8021FD659A00705615 /* Snake */ = {
+		F85E744B2201486F00FA641D /* Snake */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F8AB4CAF21FD659B00705615 /* Build configuration list for PBXNativeTarget "Snake" */;
+			buildConfigurationList = F85E74782201487000FA641D /* Build configuration list for PBXNativeTarget "Snake" */;
 			buildPhases = (
-				F8AB4C7D21FD659A00705615 /* Sources */,
-				F8AB4C7E21FD659A00705615 /* Frameworks */,
-				F8AB4C7F21FD659A00705615 /* Resources */,
+				867193CC764EE6A3E2273556 /* [CP] Check Pods Manifest.lock */,
+				F85E74482201486F00FA641D /* Sources */,
+				F85E74492201486F00FA641D /* Frameworks */,
+				F85E744A2201486F00FA641D /* Resources */,
 			);
 			buildRules = (
 			);
@@ -152,107 +201,110 @@
 			);
 			name = Snake;
 			productName = Snake;
-			productReference = F8AB4C8121FD659A00705615 /* Snake.app */;
+			productReference = F85E744C2201486F00FA641D /* Snake.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F8AB4C9A21FD659B00705615 /* SnakeTests */ = {
+		F85E74632201487000FA641D /* SnakeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F8AB4CB221FD659B00705615 /* Build configuration list for PBXNativeTarget "SnakeTests" */;
+			buildConfigurationList = F85E747B2201487000FA641D /* Build configuration list for PBXNativeTarget "SnakeTests" */;
 			buildPhases = (
-				F8AB4C9721FD659B00705615 /* Sources */,
-				F8AB4C9821FD659B00705615 /* Frameworks */,
-				F8AB4C9921FD659B00705615 /* Resources */,
+				F85E74602201487000FA641D /* Sources */,
+				F85E74612201487000FA641D /* Frameworks */,
+				F85E74622201487000FA641D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F8AB4C9D21FD659B00705615 /* PBXTargetDependency */,
+				F85E74662201487000FA641D /* PBXTargetDependency */,
 			);
 			name = SnakeTests;
 			productName = SnakeTests;
-			productReference = F8AB4C9B21FD659B00705615 /* SnakeTests.xctest */;
+			productReference = F85E74642201487000FA641D /* SnakeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F8AB4CA521FD659B00705615 /* SnakeUITests */ = {
+		F85E746E2201487000FA641D /* SnakeUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F8AB4CB521FD659B00705615 /* Build configuration list for PBXNativeTarget "SnakeUITests" */;
+			buildConfigurationList = F85E747E2201487000FA641D /* Build configuration list for PBXNativeTarget "SnakeUITests" */;
 			buildPhases = (
-				F8AB4CA221FD659B00705615 /* Sources */,
-				F8AB4CA321FD659B00705615 /* Frameworks */,
-				F8AB4CA421FD659B00705615 /* Resources */,
+				F85E746B2201487000FA641D /* Sources */,
+				F85E746C2201487000FA641D /* Frameworks */,
+				F85E746D2201487000FA641D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F8AB4CA821FD659B00705615 /* PBXTargetDependency */,
+				F85E74712201487000FA641D /* PBXTargetDependency */,
 			);
 			name = SnakeUITests;
 			productName = SnakeUITests;
-			productReference = F8AB4CA621FD659B00705615 /* SnakeUITests.xctest */;
+			productReference = F85E746F2201487000FA641D /* SnakeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F8AB4C7921FD659A00705615 /* Project object */ = {
+		F85E74442201486F00FA641D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "明妍";
 				TargetAttributes = {
-					F8AB4C8021FD659A00705615 = {
+					F85E744B2201486F00FA641D = {
 						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
 					};
-					F8AB4C9A21FD659B00705615 = {
+					F85E74632201487000FA641D = {
 						CreatedOnToolsVersion = 10.1;
-						TestTargetID = F8AB4C8021FD659A00705615;
+						ProvisioningStyle = Automatic;
+						TestTargetID = F85E744B2201486F00FA641D;
 					};
-					F8AB4CA521FD659B00705615 = {
+					F85E746E2201487000FA641D = {
 						CreatedOnToolsVersion = 10.1;
-						TestTargetID = F8AB4C8021FD659A00705615;
+						ProvisioningStyle = Automatic;
+						TestTargetID = F85E744B2201486F00FA641D;
 					};
 				};
 			};
-			buildConfigurationList = F8AB4C7C21FD659A00705615 /* Build configuration list for PBXProject "Snake" */;
-			compatibilityVersion = "Xcode 9.3";
+			buildConfigurationList = F85E74472201486F00FA641D /* Build configuration list for PBXProject "Snake" */;
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = F8AB4C7821FD659A00705615;
-			productRefGroup = F8AB4C8221FD659A00705615 /* Products */;
+			mainGroup = F85E74432201486F00FA641D;
+			productRefGroup = F85E744D2201486F00FA641D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F8AB4C8021FD659A00705615 /* Snake */,
-				F8AB4C9A21FD659B00705615 /* SnakeTests */,
-				F8AB4CA521FD659B00705615 /* SnakeUITests */,
+				F85E744B2201486F00FA641D /* Snake */,
+				F85E74632201487000FA641D /* SnakeTests */,
+				F85E746E2201487000FA641D /* SnakeUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F8AB4C7F21FD659A00705615 /* Resources */ = {
+		F85E744A2201486F00FA641D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8AB4C8821FD659A00705615 /* art.scnassets in Resources */,
-				F8AB4C9321FD659A00705615 /* LaunchScreen.storyboard in Resources */,
-				F8AB4C9021FD659A00705615 /* Assets.xcassets in Resources */,
-				F8AB4C8E21FD659A00705615 /* Main.storyboard in Resources */,
+				F85E745C2201487000FA641D /* LaunchScreen.storyboard in Resources */,
+				F85E74592201487000FA641D /* Assets.xcassets in Resources */,
+				F862E2732201839B00D7D510 /* snake.scnassets in Resources */,
+				F85E74572201486F00FA641D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8AB4C9921FD659B00705615 /* Resources */ = {
+		F85E74622201487000FA641D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8AB4CA421FD659B00705615 /* Resources */ = {
+		F85E746D2201487000FA641D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -261,61 +313,90 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		867193CC764EE6A3E2273556 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Snake-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		F8AB4C7D21FD659A00705615 /* Sources */ = {
+		F85E74482201486F00FA641D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8AB4C8B21FD659A00705615 /* GameViewController.m in Sources */,
-				F8AB4C9621FD659A00705615 /* main.m in Sources */,
-				F8AB4C8621FD659A00705615 /* AppDelegate.m in Sources */,
+				F862E279220188C400D7D510 /* MYGridView.m in Sources */,
+				F85E74542201486F00FA641D /* ViewController.m in Sources */,
+				F85E745F2201487000FA641D /* main.m in Sources */,
+				F85E74512201486F00FA641D /* AppDelegate.m in Sources */,
+				F862E2762201873800D7D510 /* MYGridBox.m in Sources */,
+				F862E271220181F500D7D510 /* MYSnakeItemBox.m in Sources */,
+				F862E26E2201813000D7D510 /* MYSnakeItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8AB4C9721FD659B00705615 /* Sources */ = {
+		F85E74602201487000FA641D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8AB4CA021FD659B00705615 /* SnakeTests.m in Sources */,
+				F85E74692201487000FA641D /* SnakeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8AB4CA221FD659B00705615 /* Sources */ = {
+		F85E746B2201487000FA641D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8AB4CAB21FD659B00705615 /* SnakeUITests.m in Sources */,
+				F85E74742201487000FA641D /* SnakeUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F8AB4C9D21FD659B00705615 /* PBXTargetDependency */ = {
+		F85E74662201487000FA641D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F8AB4C8021FD659A00705615 /* Snake */;
-			targetProxy = F8AB4C9C21FD659B00705615 /* PBXContainerItemProxy */;
+			target = F85E744B2201486F00FA641D /* Snake */;
+			targetProxy = F85E74652201487000FA641D /* PBXContainerItemProxy */;
 		};
-		F8AB4CA821FD659B00705615 /* PBXTargetDependency */ = {
+		F85E74712201487000FA641D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F8AB4C8021FD659A00705615 /* Snake */;
-			targetProxy = F8AB4CA721FD659B00705615 /* PBXContainerItemProxy */;
+			target = F85E744B2201486F00FA641D /* Snake */;
+			targetProxy = F85E74702201487000FA641D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F8AB4C8C21FD659A00705615 /* Main.storyboard */ = {
+		F85E74552201486F00FA641D /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F8AB4C8D21FD659A00705615 /* Base */,
+				F85E74562201486F00FA641D /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		F8AB4C9121FD659A00705615 /* LaunchScreen.storyboard */ = {
+		F85E745A2201487000FA641D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F8AB4C9221FD659A00705615 /* Base */,
+				F85E745B2201487000FA641D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -323,7 +404,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		F8AB4CAD21FD659B00705615 /* Debug */ = {
+		F85E74762201487000FA641D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -382,7 +463,7 @@
 			};
 			name = Debug;
 		};
-		F8AB4CAE21FD659B00705615 /* Release */ = {
+		F85E74772201487000FA641D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -435,54 +516,44 @@
 			};
 			name = Release;
 		};
-		F8AB4CB021FD659B00705615 /* Debug */ = {
+		F85E74792201487000FA641D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACD66F27328BC945FD869CA8 /* Pods-Snake.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AH8FHU45PG;
 				INFOPLIST_FILE = Snake/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwyxgs.Snake;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		F8AB4CB121FD659B00705615 /* Release */ = {
+		F85E747A2201487000FA641D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7169FDCC1830BCD053D3745B /* Pods-Snake.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AH8FHU45PG;
 				INFOPLIST_FILE = Snake/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwyxgs.Snake;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		F8AB4CB321FD659B00705615 /* Debug */ = {
+		F85E747C2201487000FA641D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AH8FHU45PG;
 				INFOPLIST_FILE = SnakeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwyxgs.SnakeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -490,18 +561,14 @@
 			};
 			name = Debug;
 		};
-		F8AB4CB421FD659B00705615 /* Release */ = {
+		F85E747D2201487000FA641D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AH8FHU45PG;
 				INFOPLIST_FILE = SnakeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwyxgs.SnakeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -509,17 +576,13 @@
 			};
 			name = Release;
 		};
-		F8AB4CB621FD659B00705615 /* Debug */ = {
+		F85E747F2201487000FA641D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AH8FHU45PG;
 				INFOPLIST_FILE = SnakeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwyxgs.SnakeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -527,17 +590,13 @@
 			};
 			name = Debug;
 		};
-		F8AB4CB721FD659B00705615 /* Release */ = {
+		F85E74802201487000FA641D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AH8FHU45PG;
 				INFOPLIST_FILE = SnakeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwyxgs.SnakeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -548,43 +607,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F8AB4C7C21FD659A00705615 /* Build configuration list for PBXProject "Snake" */ = {
+		F85E74472201486F00FA641D /* Build configuration list for PBXProject "Snake" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F8AB4CAD21FD659B00705615 /* Debug */,
-				F8AB4CAE21FD659B00705615 /* Release */,
+				F85E74762201487000FA641D /* Debug */,
+				F85E74772201487000FA641D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F8AB4CAF21FD659B00705615 /* Build configuration list for PBXNativeTarget "Snake" */ = {
+		F85E74782201487000FA641D /* Build configuration list for PBXNativeTarget "Snake" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F8AB4CB021FD659B00705615 /* Debug */,
-				F8AB4CB121FD659B00705615 /* Release */,
+				F85E74792201487000FA641D /* Debug */,
+				F85E747A2201487000FA641D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F8AB4CB221FD659B00705615 /* Build configuration list for PBXNativeTarget "SnakeTests" */ = {
+		F85E747B2201487000FA641D /* Build configuration list for PBXNativeTarget "SnakeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F8AB4CB321FD659B00705615 /* Debug */,
-				F8AB4CB421FD659B00705615 /* Release */,
+				F85E747C2201487000FA641D /* Debug */,
+				F85E747D2201487000FA641D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F8AB4CB521FD659B00705615 /* Build configuration list for PBXNativeTarget "SnakeUITests" */ = {
+		F85E747E2201487000FA641D /* Build configuration list for PBXNativeTarget "SnakeUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F8AB4CB621FD659B00705615 /* Debug */,
-				F8AB4CB721FD659B00705615 /* Release */,
+				F85E747F2201487000FA641D /* Debug */,
+				F85E74802201487000FA641D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = F8AB4C7921FD659A00705615 /* Project object */;
+	rootObject = F85E74442201486F00FA641D /* Project object */;
 }

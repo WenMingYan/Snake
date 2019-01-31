@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  MYGridView.h
 //  Snake
 //
 //  Created by 明妍 on 2019/1/30.
@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+NS_ASSUME_NONNULL_BEGIN
 
-@property (strong, nonatomic) UIWindow *window;
+@interface MYGridView : UIView
 
++ (UIImage *)gridImage;
 
 @end
 
+NS_ASSUME_NONNULL_END
