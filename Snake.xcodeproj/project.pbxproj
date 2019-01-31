@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		166279AAC0787A821AA0D13B /* libPods-Snake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85DB67814327D0D9786C1474 /* libPods-Snake.a */; };
+		F840FC5F2202C39F00ACB47A /* MYRestartView.m in Sources */ = {isa = PBXBuildFile; fileRef = F840FC5E2202C39F00ACB47A /* MYRestartView.m */; };
 		F85E74512201486F00FA641D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F85E74502201486F00FA641D /* AppDelegate.m */; };
 		F85E74542201486F00FA641D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F85E74532201486F00FA641D /* ViewController.m */; };
 		F85E74572201486F00FA641D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F85E74552201486F00FA641D /* Main.storyboard */; };
@@ -45,6 +46,8 @@
 		7169FDCC1830BCD053D3745B /* Pods-Snake.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snake.release.xcconfig"; path = "Pods/Target Support Files/Pods-Snake/Pods-Snake.release.xcconfig"; sourceTree = "<group>"; };
 		85DB67814327D0D9786C1474 /* libPods-Snake.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Snake.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACD66F27328BC945FD869CA8 /* Pods-Snake.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snake.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snake/Pods-Snake.debug.xcconfig"; sourceTree = "<group>"; };
+		F840FC5D2202C39F00ACB47A /* MYRestartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYRestartView.h; sourceTree = "<group>"; };
+		F840FC5E2202C39F00ACB47A /* MYRestartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYRestartView.m; sourceTree = "<group>"; };
 		F85E744C2201486F00FA641D /* Snake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F85E744F2201486F00FA641D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F85E74502201486F00FA641D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 				F862E2752201873800D7D510 /* MYGridBox.m */,
 				F862E277220188C400D7D510 /* MYGridView.h */,
 				F862E278220188C400D7D510 /* MYGridView.m */,
+				F840FC5D2202C39F00ACB47A /* MYRestartView.h */,
+				F840FC5E2202C39F00ACB47A /* MYRestartView.m */,
 			);
 			path = Snake;
 			sourceTree = "<group>";
@@ -343,6 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F840FC5F2202C39F00ACB47A /* MYRestartView.m in Sources */,
 				F862E279220188C400D7D510 /* MYGridView.m in Sources */,
 				F85E74542201486F00FA641D /* ViewController.m in Sources */,
 				F85E745F2201487000FA641D /* main.m in Sources */,

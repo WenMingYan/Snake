@@ -12,9 +12,19 @@
 #import "MYSnakeItem.h"
 #import "MYSnakeItemBox.h"
 #import "MYGridView.h"
+#import "MYRestartView.h"
 
 CGFloat kSnakeInitialCount = 6;
 CGFloat kPlandLength = 20;
+
+typedef enum : NSUInteger {
+    MYCurrentDirectionLeft,
+    MYCurrentDirectionRight,
+    MYCurrentDirectionFore,
+    MYCurrentDirectionBack,
+    MYCurrentDirectionTop,
+    MYCurrentDirectionBottom,
+} MYCurrentDirection;
 
 @interface ViewController ()
 
@@ -33,6 +43,11 @@ CGFloat kPlandLength = 20;
 
 @property (nonatomic, assign) BOOL isPlaying;/** < 是否正在游戏*/
 @property (nonatomic, strong) NSTimer *timer; /**< 每秒做的动作  */
+@property (nonatomic, assign) MYCurrentDirection currentDirection;/** < 当前的方向*/
+@property (nonatomic, assign) NSInteger timeStep;/** < 时间间隔*/
+
+@property (nonatomic, strong) MYRestartView *pageView;
+@property (nonatomic, strong) SCNSphere *foodPhere; /**< 饲料  */
 
 @end
 
@@ -45,6 +60,8 @@ CGFloat kPlandLength = 20;
     [super viewDidLoad];
     [self initData];
     [self initView];
+    self.timeStep = 1;
+   
 }
 
 - (void)initData {
@@ -56,15 +73,19 @@ CGFloat kPlandLength = 20;
     [self.threeDscnView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    [self.view addSubview:self.pageView];
+    [self.pageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+        
+    }];
 }
-
 
 /**
  初始化蛇item
  */
 - (void)setupSnake {
     MYSnakeItemBox *preItemBox;
-    SCNVector3 vector = SCNVector3Make(1, 1, 1);
+    SCNVector3 vector = SCNVector3Make(1.25, 1.25, 1.25);
     for (int i = 0; i < kSnakeInitialCount; i++) {
         MYSnakeItem *item = [[MYSnakeItem alloc] init];
         item.position = vector;
@@ -110,22 +131,28 @@ CGFloat kPlandLength = 20;
             SCNPlane *plane = (SCNPlane*)result.node.geometry;
             if ([plane isKindOfClass:[SCNPlane class]]) {
                 if ([plane isEqual:self.bottomPlane]) {
-                    [self singleStepBottom];
+                    self.currentDirection = MYCurrentDirectionBottom;
+//                    [self singleStepBottom];
                 }
                 if ([plane isEqual:self.topPlane]) {
-                    [self singleStepTop];
+                    self.currentDirection = MYCurrentDirectionTop;
+//                    [self singleStepTop];
                 }
                 if ([plane isEqual:self.leftPlane]) {
-                    [self singleStepLeft];
+                    self.currentDirection = MYCurrentDirectionLeft;
+//                    [self singleStepLeft];
                 }
                 if ([plane isEqual:self.rightPlane]) {
-                    [self singleStepRight];
+                    self.currentDirection = MYCurrentDirectionRight;
+//                    [self singleStepRight];
                 }
                 if ([plane isEqual:self.forePlane]) {
-                    [self singleStepFore];
+                    self.currentDirection = MYCurrentDirectionFore;
+//                    [self singleStepFore];
                 }
                 if ([plane isEqual:self.backPlane]) {
-                    [self singleStepBack];
+                    self.currentDirection = MYCurrentDirectionBack;
+//                    [self singleStepBack];
                 }
             }
         }
@@ -152,9 +179,20 @@ CGFloat kPlandLength = 20;
     box.position = newVector;
     BOOL isAlive = [self checkIsALive];
     if (!isAlive) {
-        self.isPlaying = NO;
-        [self restart];
+        [self failGame];
     }
+}
+
+- (void)failGame {
+    self.isPlaying = NO;
+    //弹出页面
+}
+
+/**
+ 弹出重新开始页面
+ */
+- (void)pushRestartPage {
+    
 }
 
 - (void)restart {
@@ -251,6 +289,55 @@ CGFloat kPlandLength = 20;
 #pragma mark - --------------------private methods--------------
 #pragma mark - --------------------getters & setters & init members ------------------
 
+- (void)setIsPlaying:(BOOL)isPlaying {
+    _isPlaying = isPlaying;
+    if (isPlaying && !_timer) {
+        dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.timeStep
+                                                              target:self
+                                                            selector:@selector(onTimer)
+                                                            userInfo:nil
+                                                             repeats:YES];
+            [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+            self.timer = timer;
+        });
+    } else {
+        [self.timer invalidate];
+        _timer = nil;
+    }
+}
+
+- (void)onTimer {
+    switch (self.currentDirection) {
+        case MYCurrentDirectionTop: {
+            [self singleStepTop];
+        }
+            break;
+        case MYCurrentDirectionBack: {
+            [self singleStepBack];
+        }
+            break;
+        case MYCurrentDirectionFore: {
+            [self singleStepFore];
+        }
+            break;
+        case MYCurrentDirectionBottom: {
+            [self singleStepBottom];
+        }
+            break;
+        case MYCurrentDirectionLeft: {
+            [self singleStepLeft];
+        }
+            break;
+        case MYCurrentDirectionRight: {
+            [self singleStepRight];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 - (SCNCamera *)camera {
     if (!_camera) {
         _camera = [[SCNCamera alloc] init];
@@ -323,6 +410,23 @@ CGFloat kPlandLength = 20;
         
     }
     return _threeDscnView;
+}
+
+- (MYRestartView *)pageView {
+    if (!_pageView) {
+        _pageView = [[MYRestartView alloc] init];
+        [_pageView setTextName:@"欢迎欢迎\n点击任意一个面开始游戏"];
+        [_pageView setButtonName:@"进入游戏"];
+        __block ViewController *weakSelf = self;
+        _pageView.clickBlock = ^{
+            [UIView animateWithDuration:0.3 animations:^{
+                weakSelf.pageView.alpha = 0;
+            } completion:^(BOOL finished) {
+                weakSelf.pageView.hidden = YES;
+            }];
+        };
+    }
+    return _pageView;
 }
 
 @end
