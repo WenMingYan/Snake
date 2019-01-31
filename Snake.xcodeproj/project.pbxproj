@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		166279AAC0787A821AA0D13B /* libPods-Snake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85DB67814327D0D9786C1474 /* libPods-Snake.a */; };
 		F840FC5F2202C39F00ACB47A /* MYRestartView.m in Sources */ = {isa = PBXBuildFile; fileRef = F840FC5E2202C39F00ACB47A /* MYRestartView.m */; };
+		F840FC622202CEA800ACB47A /* MYSnakeFood.m in Sources */ = {isa = PBXBuildFile; fileRef = F840FC612202CEA800ACB47A /* MYSnakeFood.m */; };
 		F85E74512201486F00FA641D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F85E74502201486F00FA641D /* AppDelegate.m */; };
 		F85E74542201486F00FA641D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F85E74532201486F00FA641D /* ViewController.m */; };
 		F85E74572201486F00FA641D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F85E74552201486F00FA641D /* Main.storyboard */; };
@@ -18,7 +19,6 @@
 		F85E74692201487000FA641D /* SnakeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F85E74682201487000FA641D /* SnakeTests.m */; };
 		F85E74742201487000FA641D /* SnakeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F85E74732201487000FA641D /* SnakeUITests.m */; };
 		F862E26B22017FC100D7D510 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F862E26A22017FC100D7D510 /* SceneKit.framework */; };
-		F862E26E2201813000D7D510 /* MYSnakeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F862E26D2201813000D7D510 /* MYSnakeItem.m */; };
 		F862E271220181F500D7D510 /* MYSnakeItemBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F862E270220181F500D7D510 /* MYSnakeItemBox.m */; };
 		F862E2732201839B00D7D510 /* snake.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F862E2722201839B00D7D510 /* snake.scnassets */; };
 		F862E2762201873800D7D510 /* MYGridBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F862E2752201873800D7D510 /* MYGridBox.m */; };
@@ -48,6 +48,8 @@
 		ACD66F27328BC945FD869CA8 /* Pods-Snake.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snake.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Snake/Pods-Snake.debug.xcconfig"; sourceTree = "<group>"; };
 		F840FC5D2202C39F00ACB47A /* MYRestartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYRestartView.h; sourceTree = "<group>"; };
 		F840FC5E2202C39F00ACB47A /* MYRestartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYRestartView.m; sourceTree = "<group>"; };
+		F840FC602202CEA800ACB47A /* MYSnakeFood.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYSnakeFood.h; sourceTree = "<group>"; };
+		F840FC612202CEA800ACB47A /* MYSnakeFood.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYSnakeFood.m; sourceTree = "<group>"; };
 		F85E744C2201486F00FA641D /* Snake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F85E744F2201486F00FA641D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F85E74502201486F00FA641D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -65,8 +67,6 @@
 		F85E74732201487000FA641D /* SnakeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnakeUITests.m; sourceTree = "<group>"; };
 		F85E74752201487000FA641D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F862E26A22017FC100D7D510 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
-		F862E26C2201813000D7D510 /* MYSnakeItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYSnakeItem.h; sourceTree = "<group>"; };
-		F862E26D2201813000D7D510 /* MYSnakeItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYSnakeItem.m; sourceTree = "<group>"; };
 		F862E26F220181F500D7D510 /* MYSnakeItemBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYSnakeItemBox.h; sourceTree = "<group>"; };
 		F862E270220181F500D7D510 /* MYSnakeItemBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYSnakeItemBox.m; sourceTree = "<group>"; };
 		F862E2722201839B00D7D510 /* snake.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = snake.scnassets; sourceTree = "<group>"; };
@@ -155,8 +155,6 @@
 				F85E745A2201487000FA641D /* LaunchScreen.storyboard */,
 				F85E745D2201487000FA641D /* Info.plist */,
 				F85E745E2201487000FA641D /* main.m */,
-				F862E26C2201813000D7D510 /* MYSnakeItem.h */,
-				F862E26D2201813000D7D510 /* MYSnakeItem.m */,
 				F862E26F220181F500D7D510 /* MYSnakeItemBox.h */,
 				F862E270220181F500D7D510 /* MYSnakeItemBox.m */,
 				F862E2722201839B00D7D510 /* snake.scnassets */,
@@ -166,6 +164,8 @@
 				F862E278220188C400D7D510 /* MYGridView.m */,
 				F840FC5D2202C39F00ACB47A /* MYRestartView.h */,
 				F840FC5E2202C39F00ACB47A /* MYRestartView.m */,
+				F840FC602202CEA800ACB47A /* MYSnakeFood.h */,
+				F840FC612202CEA800ACB47A /* MYSnakeFood.m */,
 			);
 			path = Snake;
 			sourceTree = "<group>";
@@ -349,13 +349,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F840FC5F2202C39F00ACB47A /* MYRestartView.m in Sources */,
+				F840FC622202CEA800ACB47A /* MYSnakeFood.m in Sources */,
 				F862E279220188C400D7D510 /* MYGridView.m in Sources */,
 				F85E74542201486F00FA641D /* ViewController.m in Sources */,
 				F85E745F2201487000FA641D /* main.m in Sources */,
 				F85E74512201486F00FA641D /* AppDelegate.m in Sources */,
 				F862E2762201873800D7D510 /* MYGridBox.m in Sources */,
 				F862E271220181F500D7D510 /* MYSnakeItemBox.m in Sources */,
-				F862E26E2201813000D7D510 /* MYSnakeItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

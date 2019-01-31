@@ -10,11 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class MYSnakeItem;
 
 @interface MYSnakeItemBox : SCNBox
 
-+ (instancetype)snakeItemBoxiWithSnakeItem:(MYSnakeItem *)item;
++ (instancetype)snakeItemBox;
 
 @property(nonatomic, weak) MYSnakeItemBox *nextItemBox;/**< 下一节  */
 @property(nonatomic, weak) MYSnakeItemBox *preItemBox;/**< 上一节  */

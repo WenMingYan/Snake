@@ -9,10 +9,10 @@
 #import "ViewController.h"
 #import <SceneKit/SceneKit.h>
 #import <Masonry/Masonry.h>
-#import "MYSnakeItem.h"
 #import "MYSnakeItemBox.h"
 #import "MYGridView.h"
 #import "MYRestartView.h"
+#import "MYSnakeFood.h"
 
 CGFloat kSnakeInitialCount = 6;
 CGFloat kPlandLength = 20;
@@ -47,7 +47,10 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) NSInteger timeStep;/** < 时间间隔*/
 
 @property (nonatomic, strong) MYRestartView *pageView;
-@property (nonatomic, strong) SCNSphere *foodPhere; /**< 饲料  */
+@property(nonatomic, weak) MYSnakeItemBox *headItemBox;
+@property(nonatomic, weak) MYSnakeItemBox *lastItemBox;
+@property (nonatomic, strong) MYSnakeFood *snakeFood;
+@property (nonatomic, assign) SCNVector3 lastVector;/** < 蛇尾的位置*/
 
 @end
 
@@ -66,6 +69,7 @@ typedef enum : NSUInteger {
 
 - (void)initData {
     [self setupSnake];
+    [self setupFood];
 }
 
 - (void)initView {
@@ -80,6 +84,40 @@ typedef enum : NSUInteger {
     }];
 }
 
+- (void)setupFood {
+    SCNNode *node = [SCNNode node];
+    MYSnakeFood *snakeFood = [MYSnakeFood snakeFood];
+    node.geometry = snakeFood;
+    node.position = [self getFoodPosition];
+    [self.threeScene.rootNode addChildNode:node];
+    self.snakeFood = snakeFood;
+    snakeFood.position = node.position;
+}
+
+- (SCNVector3)getFoodPosition {
+//    return SCNVector3Make(.25, .25, 1.25);
+    SCNVector3 vector = SCNVector3Zero;
+    BOOL isLegalFoodPosition = YES;
+    do {
+        int i = 9;
+        CGFloat vectorX = 0.25 + 0.5 * i;
+        CGFloat vectorY = 0.25 + 0.5 * i;
+        CGFloat vectorZ = 0.25 + 0.5 * i;
+        SCNVector3 vector = SCNVector3Make(vectorX, vectorY, vectorZ);
+        for (MYSnakeItemBox *itemBox in self.snakeItems) {
+            if (SCNVector3EqualToVector3(vector, itemBox.position)) {
+                isLegalFoodPosition = NO;
+                break;
+            }
+        }
+    } while (!isLegalFoodPosition);
+    return vector;
+}
+
+- (void)refreshFoodPosition {
+    self.snakeFood.position = [self getFoodPosition];
+}
+
 /**
  初始化蛇item
  */
@@ -87,9 +125,9 @@ typedef enum : NSUInteger {
     MYSnakeItemBox *preItemBox;
     SCNVector3 vector = SCNVector3Make(1.25, 1.25, 1.25);
     for (int i = 0; i < kSnakeInitialCount; i++) {
-        MYSnakeItem *item = [[MYSnakeItem alloc] init];
-        item.position = vector;
-        MYSnakeItemBox *itemBox = [MYSnakeItemBox snakeItemBoxiWithSnakeItem:item];
+
+        MYSnakeItemBox *itemBox = [MYSnakeItemBox snakeItemBox];
+        itemBox.position = vector;
         preItemBox.nextItemBox = itemBox;
         itemBox.preItemBox = preItemBox;
         preItemBox = itemBox;
@@ -101,6 +139,9 @@ typedef enum : NSUInteger {
             vector.y += 0.5;
         }
         [self.snakeItems addObject:itemBox];
+        if (i == kSnakeInitialCount - 1) {
+            self.lastItemBox = itemBox;
+        }
     }
     // 添加蛇到场景中
     for (MYSnakeItemBox *snakeItemBox in self.snakeItems) {
@@ -110,6 +151,7 @@ typedef enum : NSUInteger {
         [self.threeScene.rootNode addChildNode:node];
     }
     MYSnakeItemBox *firstSnakeItemBox = [self.snakeItems objectAtIndex:0];
+    self.headItemBox = firstSnakeItemBox;
     SCNMaterial *material = [SCNMaterial material];
     material.diffuse.contents = [UIColor greenColor];
     firstSnakeItemBox.materials = @[material];
@@ -120,9 +162,9 @@ typedef enum : NSUInteger {
 #pragma mark - --------------------Event Response--------------
 
 - (void)onClickTap:(UIGestureRecognizer *)recognizer {
-    if (!self.isPlaying) {
-        self.isPlaying = YES;
-    }
+//    if (!self.isPlaying) {
+//        self.isPlaying = YES;
+//    }
     if ([recognizer.view isEqual:self.threeDscnView]) {
          CGPoint point = [recognizer locationInView:self.threeDscnView];
         NSArray<SCNHitTestResult *> *results = [self.threeDscnView hitTest:point options:nil];
@@ -132,29 +174,33 @@ typedef enum : NSUInteger {
             if ([plane isKindOfClass:[SCNPlane class]]) {
                 if ([plane isEqual:self.bottomPlane]) {
                     self.currentDirection = MYCurrentDirectionBottom;
-//                    [self singleStepBottom];
+                    [self singleStepBottom];
                 }
                 if ([plane isEqual:self.topPlane]) {
                     self.currentDirection = MYCurrentDirectionTop;
-//                    [self singleStepTop];
+                    [self singleStepTop];
                 }
                 if ([plane isEqual:self.leftPlane]) {
                     self.currentDirection = MYCurrentDirectionLeft;
-//                    [self singleStepLeft];
+                    [self singleStepLeft];
                 }
                 if ([plane isEqual:self.rightPlane]) {
                     self.currentDirection = MYCurrentDirectionRight;
-//                    [self singleStepRight];
+                    [self singleStepRight];
                 }
                 if ([plane isEqual:self.forePlane]) {
                     self.currentDirection = MYCurrentDirectionFore;
-//                    [self singleStepFore];
+                    [self singleStepFore];
                 }
                 if ([plane isEqual:self.backPlane]) {
                     self.currentDirection = MYCurrentDirectionBack;
-//                    [self singleStepBack];
+                    [self singleStepBack];
                 }
             }
+        }
+        BOOL isEat = [self checkCanEat];
+        if (isEat) {
+            [self addNewSnakeItem];
         }
     }
 }
@@ -168,7 +214,7 @@ typedef enum : NSUInteger {
 }
 
 - (void)moveSnakeHead:(SCNVector3)diffVector {
-    MYSnakeItemBox *box = self.snakeItems.firstObject;
+    MYSnakeItemBox *box = self.headItemBox;
     SCNVector3 vector = box.position;
     SCNVector3 newVector = SCNVector3Make(vector.x + diffVector.x , vector.y + diffVector.y, vector.z + diffVector.z);
     SCNNode *node = box.node;
@@ -186,17 +232,24 @@ typedef enum : NSUInteger {
 - (void)failGame {
     self.isPlaying = NO;
     //弹出页面
+    [self pushRestartPage];
 }
 
 /**
  弹出重新开始页面
  */
 - (void)pushRestartPage {
-    
+    //TODO: wmy
+    self.pageView.alpha = 0;
+    self.pageView.hidden = NO;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.pageView.alpha = 1;
+    }];
 }
 
 - (void)restart {
     //TODO: wmy 重新开始
+    
 }
 
 /**
@@ -214,7 +267,7 @@ typedef enum : NSUInteger {
  是否越过边界
  */
 - (BOOL)checkHeadIsExceedEdge {
-    MYSnakeItemBox *firstBox = self.snakeItems.firstObject;
+    MYSnakeItemBox *firstBox = self.headItemBox;
     if (fabsf(firstBox.position.x) < 5.f &&
         (firstBox.position.y < 10.f && firstBox.position.y >0) &&
         fabsf(firstBox.position.z) < 5.f) {
@@ -224,7 +277,7 @@ typedef enum : NSUInteger {
 }
 
 - (BOOL)checkHeadIsInSnakeBody {
-    MYSnakeItemBox *firstBox = self.snakeItems.firstObject;
+    MYSnakeItemBox *firstBox = self.headItemBox;
     for (int i = 1; i < self.snakeItems.count; i++) {
         MYSnakeItemBox *box = [self.snakeItems objectAtIndex:i];
         if (SCNVector3EqualToVector3(firstBox.position, box.position)) {
@@ -235,14 +288,27 @@ typedef enum : NSUInteger {
 }
 
 /**
+ 是否吃到了
+ */
+- (BOOL)checkCanEat {
+    MYSnakeItemBox *itemBox = self.headItemBox;
+    if (SCNVector3EqualToVector3(itemBox.position, self.snakeFood.position)) {
+        return YES;
+    }
+    return NO;
+}
+
+/**
  前移一格
  */
 - (void)singleStepFore {
     [self actionfollowSnakeItem];
-    [self moveSnakeHead:SCNVector3Make( 0, 0, 0.5)];
+    [self moveSnakeHead:SCNVector3Make(0, 0, 0.5)];
 }
 
 - (void)actionfollowSnakeItem {
+    MYSnakeItemBox *lastItemBox = [self.snakeItems objectAtIndex:self.snakeItems.count - 1];
+    self.lastVector = lastItemBox.position;
     for (int i = (int)self.snakeItems.count - 1; i >0 ; i--) {
         MYSnakeItemBox *followBox = [self.snakeItems objectAtIndex:i];
         SCNNode *node = followBox.node;
@@ -286,25 +352,40 @@ typedef enum : NSUInteger {
     [self moveSnakeHead:SCNVector3Make(0, 0.5, 0)];
 }
 
+- (void)addNewSnakeItem {
+ 
+    MYSnakeItemBox *itemBox = [MYSnakeItemBox snakeItemBox];
+    self.lastItemBox.nextItemBox = itemBox;
+    itemBox.preItemBox = self.lastItemBox;
+    itemBox.position = self.lastVector;
+    
+    self.lastItemBox = itemBox;
+    SCNNode *node = [SCNNode nodeWithGeometry:itemBox];
+    node.position = itemBox.position;
+    itemBox.node = node;
+    [self.threeScene.rootNode addChildNode:node];
+    [self getFoodPosition];
+}
+
 #pragma mark - --------------------private methods--------------
 #pragma mark - --------------------getters & setters & init members ------------------
 
 - (void)setIsPlaying:(BOOL)isPlaying {
     _isPlaying = isPlaying;
-    if (isPlaying && !_timer) {
-        dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.timeStep
-                                                              target:self
-                                                            selector:@selector(onTimer)
-                                                            userInfo:nil
-                                                             repeats:YES];
-            [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-            self.timer = timer;
-        });
-    } else {
-        [self.timer invalidate];
-        _timer = nil;
-    }
+//    if (isPlaying && !_timer) {
+//        dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.timeStep
+//                                                              target:self
+//                                                            selector:@selector(onTimer)
+//                                                            userInfo:nil
+//                                                             repeats:YES];
+//            [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+//            self.timer = timer;
+//        });
+//    } else {
+//        [self.timer invalidate];
+//        _timer = nil;
+//    }
 }
 
 - (void)onTimer {
@@ -336,6 +417,10 @@ typedef enum : NSUInteger {
         default:
             break;
     }
+    BOOL isEat = [self checkCanEat];
+    if (isEat) {
+        [self addNewSnakeItem];
+    }
 }
 
 - (SCNCamera *)camera {
@@ -355,8 +440,6 @@ typedef enum : NSUInteger {
 - (SCNScene *)threeScene {
     if (!_threeScene) {
         _threeScene = [SCNScene sceneNamed:@"snake.scnassets/snake.scn"];
-        
-        
         // 添加照相机
         SCNNode *bottomNode = [_threeScene.rootNode childNodeWithName:@"bottomPlane" recursively:NO];
         SCNNode *topNode = [_threeScene.rootNode childNodeWithName:@"topPlane" recursively:NO];
@@ -365,13 +448,14 @@ typedef enum : NSUInteger {
         SCNNode *foreNode = [_threeScene.rootNode childNodeWithName:@"forePlane" recursively:NO];
         SCNNode *rightNode = [_threeScene.rootNode childNodeWithName:@"rightPlane" recursively:NO];
         SCNNode *cameraNode = [_threeScene.rootNode childNodeWithName:@"camera" recursively:NO];
-        
+
         self.bottomPlane = (SCNPlane *)bottomNode.geometry;
         self.topPlane = (SCNPlane *)topNode.geometry;
         self.backPlane = (SCNPlane *)backNode.geometry;
         self.leftPlane = (SCNPlane *)leftNode.geometry;
         self.rightPlane = (SCNPlane *)rightNode.geometry;
         self.forePlane = (SCNPlane *)foreNode.geometry;
+
         self.camera = cameraNode.camera;
 
         SCNMaterial *material = [SCNMaterial material];
@@ -390,6 +474,8 @@ typedef enum : NSUInteger {
         self.rightPlane.materials = @[material];
         
         self.camera.focalLength = 70;
+        
+        
  
     }
     return _threeScene;
@@ -400,6 +486,8 @@ typedef enum : NSUInteger {
         _threeDscnView = [[SCNView alloc] init];
         UITapGestureRecognizer *sceneTap = [[UITapGestureRecognizer alloc]initWithTarget:self
                                                                                   action:@selector(onClickTap:)];
+        sceneTap.numberOfTapsRequired = 1;
+        sceneTap.numberOfTouchesRequired = 1;
         [_threeDscnView addGestureRecognizer:sceneTap];
         _threeDscnView.scene = self.threeScene;
         _threeDscnView.backgroundColor = [UIColor grayColor];
