@@ -8,8 +8,7 @@
 
 #import <SceneKit/SceneKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
+extern CGFloat const kBoxLength;
 
 @interface MYSnakeItemBox : SCNBox
 
@@ -21,6 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) SCNVector3 position;
 @property(nonatomic, weak) SCNNode *node;/**< 根节点  */
 
+
 @end
 
-NS_ASSUME_NONNULL_END

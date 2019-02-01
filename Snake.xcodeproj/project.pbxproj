@@ -10,6 +10,7 @@
 		166279AAC0787A821AA0D13B /* libPods-Snake.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85DB67814327D0D9786C1474 /* libPods-Snake.a */; };
 		F840FC5F2202C39F00ACB47A /* MYRestartView.m in Sources */ = {isa = PBXBuildFile; fileRef = F840FC5E2202C39F00ACB47A /* MYRestartView.m */; };
 		F840FC622202CEA800ACB47A /* MYSnakeFood.m in Sources */ = {isa = PBXBuildFile; fileRef = F840FC612202CEA800ACB47A /* MYSnakeFood.m */; };
+		F840FC67220437E300ACB47A /* SCNGeometry+MYShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = F840FC66220437E300ACB47A /* SCNGeometry+MYShadow.m */; };
 		F85E74512201486F00FA641D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F85E74502201486F00FA641D /* AppDelegate.m */; };
 		F85E74542201486F00FA641D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F85E74532201486F00FA641D /* ViewController.m */; };
 		F85E74572201486F00FA641D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F85E74552201486F00FA641D /* Main.storyboard */; };
@@ -50,6 +51,8 @@
 		F840FC5E2202C39F00ACB47A /* MYRestartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYRestartView.m; sourceTree = "<group>"; };
 		F840FC602202CEA800ACB47A /* MYSnakeFood.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYSnakeFood.h; sourceTree = "<group>"; };
 		F840FC612202CEA800ACB47A /* MYSnakeFood.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYSnakeFood.m; sourceTree = "<group>"; };
+		F840FC65220437E300ACB47A /* SCNGeometry+MYShadow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SCNGeometry+MYShadow.h"; sourceTree = "<group>"; };
+		F840FC66220437E300ACB47A /* SCNGeometry+MYShadow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SCNGeometry+MYShadow.m"; sourceTree = "<group>"; };
 		F85E744C2201486F00FA641D /* Snake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snake.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F85E744F2201486F00FA641D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F85E74502201486F00FA641D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -166,6 +169,8 @@
 				F840FC5E2202C39F00ACB47A /* MYRestartView.m */,
 				F840FC602202CEA800ACB47A /* MYSnakeFood.h */,
 				F840FC612202CEA800ACB47A /* MYSnakeFood.m */,
+				F840FC65220437E300ACB47A /* SCNGeometry+MYShadow.h */,
+				F840FC66220437E300ACB47A /* SCNGeometry+MYShadow.m */,
 			);
 			path = Snake;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 				F85E74542201486F00FA641D /* ViewController.m in Sources */,
 				F85E745F2201487000FA641D /* main.m in Sources */,
 				F85E74512201486F00FA641D /* AppDelegate.m in Sources */,
+				F840FC67220437E300ACB47A /* SCNGeometry+MYShadow.m in Sources */,
 				F862E2762201873800D7D510 /* MYGridBox.m in Sources */,
 				F862E271220181F500D7D510 /* MYSnakeItemBox.m in Sources */,
 			);
@@ -530,6 +536,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AH8FHU45PG;
 				INFOPLIST_FILE = Snake/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwyxgs.Snake;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -545,6 +552,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AH8FHU45PG;
 				INFOPLIST_FILE = Snake/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pwyxgs.Snake;
 				PRODUCT_NAME = "$(TARGET_NAME)";

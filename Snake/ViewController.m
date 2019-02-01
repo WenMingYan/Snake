@@ -13,9 +13,15 @@
 #import "MYGridView.h"
 #import "MYRestartView.h"
 #import "MYSnakeFood.h"
+#import "SCNGeometry+MYShadow.h"
 
 CGFloat kSnakeInitialCount = 6;
 CGFloat kPlandLength = 20;
+
+CGFloat kGridWidth = 0.5;
+CGFloat kAnimationDuration = 0.5;
+
+
 
 typedef enum : NSUInteger {
     MYCurrentDirectionLeft,
@@ -32,12 +38,23 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) SCNScene *threeScene; /**< 3D场景  */
 @property (nonatomic, strong) NSMutableArray<MYSnakeItemBox *> *snakeItems; /**< 蛇身体的每一块 初始值有6块 */
 
-@property (nonatomic, strong) SCNPlane *bottomPlane; /**< 底板  */
-@property (nonatomic, strong) SCNPlane *leftPlane; /**< 左侧板  */
-@property (nonatomic, strong) SCNPlane *rightPlane; /**< 右侧板  */
-@property (nonatomic, strong) SCNPlane *topPlane; /**< 顶部板  */
-@property (nonatomic, strong) SCNPlane *forePlane; /**< 前部板  */
-@property (nonatomic, strong) SCNPlane *backPlane; /**< 背部板  */
+@property (nonatomic, weak) SCNPlane *bottomPlane; /**< 底板  */
+@property (nonatomic, weak) SCNNode *bottomNode; /**< 底板  */
+
+@property (nonatomic, weak) SCNPlane *leftPlane; /**< 左侧板  */
+@property (nonatomic, weak) SCNNode *leftNode; /**< 左侧板  */
+
+@property (nonatomic, weak) SCNPlane *rightPlane; /**< 右侧板  */
+@property (nonatomic, weak) SCNNode *rightNode; /**< 右侧板  */
+
+@property (nonatomic, weak) SCNPlane *topPlane; /**< 顶部板  */
+@property (nonatomic, weak) SCNNode *topNode; /**< 顶部板  */
+
+@property (nonatomic, weak) SCNPlane *forePlane; /**< 前部板  */
+@property (nonatomic, weak) SCNNode *foreNode; /**< 前部板  */
+
+@property (nonatomic, weak) SCNPlane *backPlane; /**< 背部板  */
+@property (nonatomic, weak) SCNNode *backNode; /**< 背部板  */
 
 @property (nonatomic, strong) SCNCamera *camera; /**< 照相机  */
 
@@ -61,8 +78,8 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initData];
     [self initView];
+    [self initData];
     self.timeStep = 1;
    
 }
@@ -95,16 +112,15 @@ typedef enum : NSUInteger {
 }
 
 - (SCNVector3)getFoodPosition {
-//    return SCNVector3Make(.25, .25, 1.25);
     SCNVector3 vector = SCNVector3Zero;
     BOOL isLegalFoodPosition = YES;
     do {
-        int x = arc4random() % 19;
-        CGFloat vectorX = 0.25 + 0.5 * (x - 10);
-        int y = arc4random() % 19;
-        CGFloat vectorY = 0.25 + 0.5 * y;
-        int z = (arc4random() % 19);
-        CGFloat vectorZ = 0.25 + 0.5 * (z - 10);
+        int x = arc4random() % (2 * (int)kBoxLength - 1);
+        CGFloat vectorX = kGridWidth / 2 + kGridWidth * (x - kBoxLength);
+        int y = arc4random() % (2 * (int)kBoxLength - 1);
+        CGFloat vectorY = kGridWidth / 2 + kGridWidth * y;
+        int z = (arc4random() % (2 * (int)kBoxLength - 1));
+        CGFloat vectorZ = kGridWidth / 2 + kGridWidth * (z - kBoxLength);
         
         vector = SCNVector3Make(vectorX, vectorY, vectorZ);
         for (MYSnakeItemBox *itemBox in self.snakeItems) {
@@ -127,7 +143,8 @@ typedef enum : NSUInteger {
 - (void)setupSnake {
     MYSnakeItemBox *preItemBox;
     //TODO: wmy 初始化蛇头
-    SCNVector3 vector = SCNVector3Make(1.25, 1.25, 1.25);
+    SCNVector3 vector = SCNVector3Make(1.25, 2.25, 3.25);
+    // 需要判定是否在场景内
     for (int i = 0; i < kSnakeInitialCount; i++) {
 
         MYSnakeItemBox *itemBox = [MYSnakeItemBox snakeItemBox];
@@ -138,9 +155,9 @@ typedef enum : NSUInteger {
         
         // 改变vector
         if (arc4random() % 2) {
-            vector.x += 0.5;
+            vector.x += kGridWidth;
         } else {
-            vector.y += 0.5;
+            vector.y += kGridWidth;
         }
         [self.snakeItems addObject:itemBox];
         if (i == kSnakeInitialCount - 1) {
@@ -150,11 +167,20 @@ typedef enum : NSUInteger {
     // 添加蛇到场景中
     for (MYSnakeItemBox *snakeItemBox in self.snakeItems) {
         SCNNode *node = [SCNNode nodeWithGeometry:snakeItemBox];
-        node.position = snakeItemBox.position;
         snakeItemBox.node = node;
         [self.threeScene.rootNode addChildNode:node];
+        [self.leftNode addChildNode:snakeItemBox.leftShadowNode];
+        [self.rightNode addChildNode:snakeItemBox.rightShadowNode];
+        [self.topNode addChildNode:snakeItemBox.topShadowNode];
+        [self.bottomNode addChildNode:snakeItemBox.bottomShadowNode];
+        [self.foreNode addChildNode:snakeItemBox.foreShadowNode];
+        [self.backNode addChildNode:snakeItemBox.backShadowNode];
+        [self itemBox:snakeItemBox shadowsRunActionWithPosition:snakeItemBox.position];
+        node.position = snakeItemBox.position;
+        
     }
     MYSnakeItemBox *firstSnakeItemBox = [self.snakeItems objectAtIndex:0];
+    
     self.headItemBox = firstSnakeItemBox;
     SCNMaterial *material = [SCNMaterial material];
     material.diffuse.contents = [UIColor greenColor];
@@ -214,7 +240,7 @@ typedef enum : NSUInteger {
  */
 - (void)singleStepBack {
     [self actionfollowSnakeItem];
-    [self moveSnakeHead:SCNVector3Make(0 , 0, - 0.5)];
+    [self moveSnakeHead:SCNVector3Make(0 , 0, - kGridWidth)];
 }
 
 - (void)moveSnakeHead:(SCNVector3)diffVector {
@@ -223,15 +249,25 @@ typedef enum : NSUInteger {
     SCNVector3 newVector = SCNVector3Make(vector.x + diffVector.x , vector.y + diffVector.y, vector.z + diffVector.z);
     SCNNode *node = box.node;
     SCNAction *action = [SCNAction moveTo:newVector duration:0.5];
-    //    NSLog(@"vector = {%f,%f,%f}",vector.x,vector.y,vector.z);
-    //    NSLog(@"newVector = {%f,%f,%f}",newVector.x,newVector.y,newVector.z);
     [node runAction:action];
     box.position = newVector;
+    [self itemBox:box shadowsRunActionWithPosition:newVector];
     BOOL isAlive = [self checkIsALive];
     if (!isAlive) {
         [self failGame];
     }
 }
+
+- (void)itemBox:(MYSnakeItemBox *)itemBox shadowsRunActionWithPosition:(SCNVector3)vector {
+    [itemBox leftActionWithDuration:kAnimationDuration byNodePosition:vector andNodeLength:kBoxLength];
+    [itemBox rightActionWithDuration:kAnimationDuration byNodePosition:vector andNodeLength:kBoxLength];
+    [itemBox topActionWithDuration:kAnimationDuration byNodePosition:vector andNodeLength:kBoxLength];
+    [itemBox bottomActionWithDuration:kAnimationDuration byNodePosition:vector andNodeLength:kBoxLength];
+    [itemBox foreActionWithDuration:kAnimationDuration byNodePosition:vector andNodeLength:kBoxLength];
+    [itemBox backActionWithDuration:kAnimationDuration byNodePosition:vector andNodeLength:kBoxLength];
+}
+
+
 
 - (void)failGame {
     self.isPlaying = NO;
@@ -273,7 +309,7 @@ typedef enum : NSUInteger {
 - (BOOL)checkHeadIsExceedEdge {
     MYSnakeItemBox *firstBox = self.headItemBox;
     if (fabsf(firstBox.position.x) < 5.f &&
-        (firstBox.position.y < 10.f && firstBox.position.y >0) &&
+        (firstBox.position.y < kBoxLength && firstBox.position.y >0) &&
         fabsf(firstBox.position.z) < 5.f) {
         return NO;
     }
@@ -307,7 +343,7 @@ typedef enum : NSUInteger {
  */
 - (void)singleStepFore {
     [self actionfollowSnakeItem];
-    [self moveSnakeHead:SCNVector3Make(0, 0, 0.5)];
+    [self moveSnakeHead:SCNVector3Make(0, 0, kGridWidth)];
 }
 
 - (void)actionfollowSnakeItem {
@@ -317,9 +353,10 @@ typedef enum : NSUInteger {
         MYSnakeItemBox *followBox = [self.snakeItems objectAtIndex:i];
         SCNNode *node = followBox.node;
         SCNAction *action = [SCNAction moveTo:followBox.preItemBox.position duration:0.5];
-        //        NSLog(@"vector = {%f,%f,%f}",followBox.preItemBox.position.x,followBox.preItemBox.position.y,followBox.preItemBox.position.z);
         [node runAction:action];
         followBox.position = followBox.preItemBox.position;
+        // shadow
+        [self itemBox:followBox shadowsRunActionWithPosition:followBox.preItemBox.position];
     }
 }
 
@@ -328,7 +365,7 @@ typedef enum : NSUInteger {
  */
 - (void)singleStepRight {
     [self actionfollowSnakeItem];
-    [self moveSnakeHead:SCNVector3Make(0.5, 0, 0)];
+    [self moveSnakeHead:SCNVector3Make(kGridWidth, 0, 0)];
 }
 
 /**
@@ -336,7 +373,7 @@ typedef enum : NSUInteger {
  */
 - (void)singleStepLeft {
     [self actionfollowSnakeItem];
-    [self moveSnakeHead:SCNVector3Make(-0.5, 0, 0)];
+    [self moveSnakeHead:SCNVector3Make(-kGridWidth, 0, 0)];
 }
 
 
@@ -345,7 +382,7 @@ typedef enum : NSUInteger {
  */
 - (void)singleStepBottom {
     [self actionfollowSnakeItem];
-    [self moveSnakeHead:SCNVector3Make(0, -0.5, 0)];
+    [self moveSnakeHead:SCNVector3Make(0, -kGridWidth, 0)];
 }
 
 /**
@@ -353,7 +390,7 @@ typedef enum : NSUInteger {
  */
 - (void)singleStepTop {
     [self actionfollowSnakeItem];
-    [self moveSnakeHead:SCNVector3Make(0, 0.5, 0)];
+    [self moveSnakeHead:SCNVector3Make(0, kGridWidth, 0)];
 }
 
 - (void)addNewSnakeItem {
@@ -367,6 +404,7 @@ typedef enum : NSUInteger {
     SCNNode *node = [SCNNode nodeWithGeometry:itemBox];
     node.position = itemBox.position;
     itemBox.node = node;
+    [self.snakeItems addObject:itemBox];
     [self.threeScene.rootNode addChildNode:node];
     [self getFoodPosition];
 }
@@ -446,11 +484,23 @@ typedef enum : NSUInteger {
         _threeScene = [SCNScene sceneNamed:@"snake.scnassets/snake.scn"];
         // 添加照相机
         SCNNode *bottomNode = [_threeScene.rootNode childNodeWithName:@"bottomPlane" recursively:NO];
+        self.bottomNode = bottomNode;
+        
         SCNNode *topNode = [_threeScene.rootNode childNodeWithName:@"topPlane" recursively:NO];
+        self.topNode = topNode;
+        
         SCNNode *backNode = [_threeScene.rootNode childNodeWithName:@"backPlane" recursively:NO];
+        self.backNode = backNode;
+        
         SCNNode *leftNode = [_threeScene.rootNode childNodeWithName:@"leftPlane" recursively:NO];
+        self.leftNode = leftNode;
+        
         SCNNode *foreNode = [_threeScene.rootNode childNodeWithName:@"forePlane" recursively:NO];
+        self.foreNode = foreNode;
+        
         SCNNode *rightNode = [_threeScene.rootNode childNodeWithName:@"rightPlane" recursively:NO];
+        self.rightNode = rightNode;
+        
         SCNNode *cameraNode = [_threeScene.rootNode childNodeWithName:@"camera" recursively:NO];
 
         self.bottomPlane = (SCNPlane *)bottomNode.geometry;
@@ -505,7 +555,8 @@ typedef enum : NSUInteger {
 }
 
 - (MYRestartView *)pageView {
-    if (!_pageView) {
+    //TODO: wmy
+    if (_pageView) {
         _pageView = [[MYRestartView alloc] init];
         [_pageView setTextName:@"欢迎欢迎\n点击任意一个面开始游戏"];
         [_pageView setButtonName:@"进入游戏"];

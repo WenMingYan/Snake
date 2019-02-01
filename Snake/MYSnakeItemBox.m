@@ -8,6 +8,8 @@
 
 #import "MYSnakeItemBox.h"
 
+CGFloat const kBoxLength = 10;
+
 @implementation MYSnakeItemBox
 
 + (instancetype)snakeItemBox {
@@ -20,7 +22,7 @@
     SCNMaterial *material = [SCNMaterial material];
     material.diffuse.contents = [UIColor redColor];
     itemBox.materials = @[material];
+    
     return itemBox;
 }
-
 @end
