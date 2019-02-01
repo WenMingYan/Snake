@@ -22,6 +22,10 @@ extern CGFloat const diff;
 @property (nonatomic, strong) SCNNode *topShadowNode; /**< 上阴影  */
 @property (nonatomic, strong) SCNNode *bottomShadowNode; /**< 下阴影  */
 
+@property (nonatomic, strong) SCNMaterial *shadowMaterial; /**< 阴影的材质  */
+
+- (void)shadowWithDuration:(CGFloat)duration byNodePosition:(SCNVector3)vector andNodeLength:(CGFloat)length;
+
 - (void)leftActionWithDuration:(CGFloat)duration byNodePosition:(SCNVector3)vector andNodeLength:(CGFloat)length;
 - (void)rightActionWithDuration:(CGFloat)duration byNodePosition:(SCNVector3)vector andNodeLength:(CGFloat)length;
 
@@ -32,3 +36,4 @@ extern CGFloat const diff;
 - (void)backActionWithDuration:(CGFloat)duration byNodePosition:(SCNVector3)vector andNodeLength:(CGFloat)length;
 
 @end
+

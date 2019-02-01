@@ -78,8 +78,9 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initView];
     [self initData];
+    [self initView];
+    
     self.timeStep = 1;
    
 }
@@ -87,7 +88,32 @@ typedef enum : NSUInteger {
 - (void)initData {
     [self setupSnake];
     [self setupFood];
+    [self setupChildNodeShadows];
 }
+
+- (void)setupChildNodeShadows {
+    for (SCNNode *childNode in self.threeScene.rootNode.childNodes) {
+        SCNGeometry *geometry = childNode.geometry;
+        if ([childNode isEqual:self.leftNode] ||
+            [childNode isEqual:self.rightNode] ||
+            [childNode isEqual:self.topNode] ||
+            [childNode isEqual:self.bottomNode] ||
+            [childNode isEqual:self.foreNode] ||
+            [childNode isEqual:self.backNode] ||
+            childNode.camera
+            ) {
+            continue;
+        }
+        [self.leftNode addChildNode:geometry.leftShadowNode];
+        [self.rightNode addChildNode:geometry.rightShadowNode];
+        [self.topNode addChildNode:geometry.topShadowNode];
+        [self.bottomNode addChildNode:geometry.bottomShadowNode];
+        [self.foreNode addChildNode:geometry.foreShadowNode];
+        [self.backNode addChildNode:geometry.backShadowNode];
+        [geometry shadowWithDuration:0 byNodePosition:childNode.position andNodeLength:kBoxLength];
+    }
+}
+
 
 - (void)initView {
     [self.view addSubview:self.threeDscnView];
@@ -97,7 +123,6 @@ typedef enum : NSUInteger {
     [self.view addSubview:self.pageView];
     [self.pageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
-        
     }];
 }
 
@@ -169,13 +194,6 @@ typedef enum : NSUInteger {
         SCNNode *node = [SCNNode nodeWithGeometry:snakeItemBox];
         snakeItemBox.node = node;
         [self.threeScene.rootNode addChildNode:node];
-        [self.leftNode addChildNode:snakeItemBox.leftShadowNode];
-        [self.rightNode addChildNode:snakeItemBox.rightShadowNode];
-        [self.topNode addChildNode:snakeItemBox.topShadowNode];
-        [self.bottomNode addChildNode:snakeItemBox.bottomShadowNode];
-        [self.foreNode addChildNode:snakeItemBox.foreShadowNode];
-        [self.backNode addChildNode:snakeItemBox.backShadowNode];
-        [self itemBox:snakeItemBox shadowsRunActionWithPosition:snakeItemBox.position];
         node.position = snakeItemBox.position;
         
     }
@@ -251,23 +269,12 @@ typedef enum : NSUInteger {
     SCNAction *action = [SCNAction moveTo:newVector duration:0.5];
     [node runAction:action];
     box.position = newVector;
-    [self itemBox:box shadowsRunActionWithPosition:newVector];
+    [box shadowWithDuration:kAnimationDuration byNodePosition:newVector andNodeLength:kBoxLength];
     BOOL isAlive = [self checkIsALive];
     if (!isAlive) {
         [self failGame];
     }
 }
-
-- (void)itemBox:(MYSnakeItemBox *)itemBox shadowsRunActionWithPosition:(SCNVector3)vector {
-    [itemBox leftActionWithDuration:kAnimationDuration byNodePosition:vector andNodeLength:kBoxLength];
-    [itemBox rightActionWithDuration:kAnimationDuration byNodePosition:vector andNodeLength:kBoxLength];
-    [itemBox topActionWithDuration:kAnimationDuration byNodePosition:vector andNodeLength:kBoxLength];
-    [itemBox bottomActionWithDuration:kAnimationDuration byNodePosition:vector andNodeLength:kBoxLength];
-    [itemBox foreActionWithDuration:kAnimationDuration byNodePosition:vector andNodeLength:kBoxLength];
-    [itemBox backActionWithDuration:kAnimationDuration byNodePosition:vector andNodeLength:kBoxLength];
-}
-
-
 
 - (void)failGame {
     self.isPlaying = NO;
@@ -356,7 +363,7 @@ typedef enum : NSUInteger {
         [node runAction:action];
         followBox.position = followBox.preItemBox.position;
         // shadow
-        [self itemBox:followBox shadowsRunActionWithPosition:followBox.preItemBox.position];
+        [followBox shadowWithDuration:kAnimationDuration byNodePosition:followBox.position andNodeLength:kBoxLength];
     }
 }
 
