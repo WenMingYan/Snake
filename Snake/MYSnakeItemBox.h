@@ -7,6 +7,7 @@
 //  蛇的身体Item 立方体 模型
 
 #import <SceneKit/SceneKit.h>
+#import "SCNGeometry+MYNode.h"
 
 extern CGFloat const kBoxLength;
 
@@ -18,7 +19,6 @@ extern CGFloat const kBoxLength;
 @property(nonatomic, weak) MYSnakeItemBox *preItemBox;/**< 上一节  */
 
 @property (nonatomic, assign) SCNVector3 position;
-@property(nonatomic, weak) SCNNode *node;/**< 根节点  */
 
 
 @end

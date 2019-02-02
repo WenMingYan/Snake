@@ -12,7 +12,6 @@ extern CGFloat const diff;
 
 @interface SCNGeometry (MYShadow)
 
-
 @property(nonatomic, strong) SCNNode *leftShadowNode;/**< 左阴影  */
 @property(nonatomic, strong) SCNNode *rightShadowNode;/**< 右阴影  */
 

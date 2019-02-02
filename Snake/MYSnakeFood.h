@@ -7,10 +7,9 @@
 //
 
 #import <SceneKit/SceneKit.h>
+#import "SCNGeometry+MYNode.h"
 
 @interface MYSnakeFood : SCNSphere
-
-@property (nonatomic, assign) SCNVector3 position;
 
 + (instancetype)snakeFood;
 

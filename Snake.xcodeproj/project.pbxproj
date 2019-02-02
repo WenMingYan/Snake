@@ -24,6 +24,7 @@
 		F862E2732201839B00D7D510 /* snake.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F862E2722201839B00D7D510 /* snake.scnassets */; };
 		F862E2762201873800D7D510 /* MYGridBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F862E2752201873800D7D510 /* MYGridBox.m */; };
 		F862E279220188C400D7D510 /* MYGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = F862E278220188C400D7D510 /* MYGridView.m */; };
+		F89AA1D8220524E60038A2CF /* SCNGeometry+MYNode.m in Sources */ = {isa = PBXBuildFile; fileRef = F89AA1D7220524E60038A2CF /* SCNGeometry+MYNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,8 @@
 		F862E2752201873800D7D510 /* MYGridBox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYGridBox.m; sourceTree = "<group>"; };
 		F862E277220188C400D7D510 /* MYGridView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYGridView.h; sourceTree = "<group>"; };
 		F862E278220188C400D7D510 /* MYGridView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYGridView.m; sourceTree = "<group>"; };
+		F89AA1D6220524E60038A2CF /* SCNGeometry+MYNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SCNGeometry+MYNode.h"; sourceTree = "<group>"; };
+		F89AA1D7220524E60038A2CF /* SCNGeometry+MYNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SCNGeometry+MYNode.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +174,8 @@
 				F840FC612202CEA800ACB47A /* MYSnakeFood.m */,
 				F840FC65220437E300ACB47A /* SCNGeometry+MYShadow.h */,
 				F840FC66220437E300ACB47A /* SCNGeometry+MYShadow.m */,
+				F89AA1D6220524E60038A2CF /* SCNGeometry+MYNode.h */,
+				F89AA1D7220524E60038A2CF /* SCNGeometry+MYNode.m */,
 			);
 			path = Snake;
 			sourceTree = "<group>";
@@ -357,6 +362,7 @@
 				F840FC622202CEA800ACB47A /* MYSnakeFood.m in Sources */,
 				F862E279220188C400D7D510 /* MYGridView.m in Sources */,
 				F85E74542201486F00FA641D /* ViewController.m in Sources */,
+				F89AA1D8220524E60038A2CF /* SCNGeometry+MYNode.m in Sources */,
 				F85E745F2201487000FA641D /* main.m in Sources */,
 				F85E74512201486F00FA641D /* AppDelegate.m in Sources */,
 				F840FC67220437E300ACB47A /* SCNGeometry+MYShadow.m in Sources */,

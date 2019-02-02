@@ -8,12 +8,23 @@
 
 #import "SCNGeometry+MYShadow.h"
 #import <objc/runtime.h>
+#import "SCNGeometry+MYNode.h"
 
-CGFloat const diff = 0.001;
+CGFloat const diff = 0.03;
 
 @implementation SCNGeometry (MYShadow)
 
 - (void)shadowWithDuration:(CGFloat)duration byNodePosition:(SCNVector3)vector andNodeLength:(CGFloat)length {
+    self.leftShadowNode.hidden =
+    self.rightShadowNode.hidden =
+    self.topShadowNode.hidden =
+    self.bottomShadowNode.hidden =
+    self.foreShadowNode.hidden =
+    self.backShadowNode.hidden =
+    self.parentNode.hidden;
+    if (self.parentNode.hidden) {
+        return;
+    }
     [self leftActionWithDuration:duration byNodePosition:vector andNodeLength:length];
     [self rightActionWithDuration:duration byNodePosition:vector andNodeLength:length];
     [self topActionWithDuration:duration byNodePosition:vector andNodeLength:length];
@@ -23,39 +34,73 @@ CGFloat const diff = 0.001;
 }
 
 - (void)foreActionWithDuration:(CGFloat)duration byNodePosition:(SCNVector3)vector andNodeLength:(CGFloat)length {
-    SCNVector3 foreVector = SCNVector3Make(-vector.x, vector.y-length/2, diff);// 相对top坐标
+    SCNVector3 foreVector = SCNVector3Make(-vector.x, vector.y, diff);// 相对top坐标
+    if ([self isOutOfBox:foreVector]) {
+        self.foreShadowNode.hidden = YES;
+        return;
+    }
+    self.foreShadowNode.hidden = NO;
     SCNAction *foreAction = [SCNAction moveTo:foreVector duration:duration];
     [self.foreShadowNode runAction:foreAction];
 }
 
 - (void)backActionWithDuration:(CGFloat)duration byNodePosition:(SCNVector3)vector andNodeLength:(CGFloat)length {
-    SCNVector3 backVector = SCNVector3Make(vector.x, -length/2+vector.y, diff);// 相对bottom坐标
+    SCNVector3 backVector = SCNVector3Make(vector.x, vector.y, diff);// 相对bottom坐标
+    if ([self isOutOfBox:backVector]) {
+        self.backShadowNode.hidden = YES;
+        return;
+    }
+    self.backShadowNode.hidden = NO;
     SCNAction *backAction = [SCNAction moveTo:backVector duration:duration];
     [self.backShadowNode runAction:backAction];
 }
 
 - (void)topActionWithDuration:(CGFloat)duration byNodePosition:(SCNVector3)vector andNodeLength:(CGFloat)length {
     SCNVector3 topVector = SCNVector3Make(vector.x, vector.z, diff);// 相对top坐标
+    if ([self isOutOfBox:topVector]) {
+        self.topShadowNode.hidden = YES;
+        return;
+    }
+    self.topShadowNode.hidden = NO;
     SCNAction *topAction = [SCNAction moveTo:topVector duration:duration];
     [self.topShadowNode runAction:topAction];
 }
 - (void)bottomActionWithDuration:(CGFloat)duration byNodePosition:(SCNVector3)vector andNodeLength:(CGFloat)length {
     SCNVector3 bottomVector = SCNVector3Make(vector.x, -vector.z, diff);// 相对bottom坐标
+    if ([self isOutOfBox:bottomVector]) {
+        self.bottomShadowNode.hidden = YES;
+        return;
+    }
+    self.bottomShadowNode.hidden = NO;
     SCNAction *bottomAction = [SCNAction moveTo:bottomVector duration:duration];
     [self.bottomShadowNode runAction:bottomAction];
 }
 
 - (void)leftActionWithDuration:(CGFloat)duration byNodePosition:(SCNVector3)vector andNodeLength:(CGFloat)length {
-    SCNVector3 leftVector = SCNVector3Make(-vector.z, -length/2+vector.y, diff);// 相对left坐标
+    SCNVector3 leftVector = SCNVector3Make(-vector.z, vector.y, diff);// 相对left坐标
+    if ([self isOutOfBox:leftVector]) {
+        self.leftShadowNode.hidden = YES;
+        return;
+    }
+    self.leftShadowNode.hidden = NO;
     SCNAction *leftAction = [SCNAction moveTo:leftVector duration:duration];
     [self.leftShadowNode runAction:leftAction];
 }
 
 
 - (void)rightActionWithDuration:(CGFloat)duration byNodePosition:(SCNVector3)vector andNodeLength:(CGFloat)length {
-    SCNVector3 rightVector = SCNVector3Make(vector.z, -length/2+vector.y, diff);// 相对right坐标
+    SCNVector3 rightVector = SCNVector3Make(vector.z, vector.y, diff);// 相对right坐标
+    if ([self isOutOfBox:rightVector]) {
+        self.rightShadowNode.hidden = YES;
+        return;
+    }
+    self.rightShadowNode.hidden = NO;
     SCNAction *rightAction = [SCNAction moveTo:rightVector duration:duration];
     [self.rightShadowNode runAction:rightAction];
+}
+
+- (BOOL)isOutOfBox:(SCNVector3)vector {
+    return fabsf(vector.x) < 5.f && fabsf(vector.y) < 5.f && fabsf(vector.z) < 5.f;
 }
 
 
@@ -169,7 +214,7 @@ CGFloat const diff = 0.001;
         plane.cornerRadius = [(SCNSphere *)self radius];
         plane.width = plane.height = [(SCNSphere *)self radius] * 2;
     }
-    material.diffuse.contents = [UIColor grayColor];
+    material.diffuse.contents = [UIColor lightGrayColor];
     plane.materials = @[material];
     return plane;
 }
